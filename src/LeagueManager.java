@@ -197,7 +197,7 @@ public class LeagueManager {
             System.out.println();
 
             // Simulate a delay of 10 seconds for the next match
-            Thread.sleep(1000);
+            Thread.sleep(10000);
         }
     }
 
