@@ -197,7 +197,7 @@ public class LeagueManager {
             System.out.println();
 
             // Simulate a delay of 10 seconds for the next match
-            Thread.sleep(10000);
+            Thread.sleep(1);
         }
     }
 
@@ -244,6 +244,11 @@ public class LeagueManager {
 
             team.setPoints(points);
             team.setGoalDifference(goalDifference);
+            try {
+                thingsCanDo();
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
         }
 
         // Sort teams based on points and goal difference
@@ -256,6 +261,72 @@ public class LeagueManager {
             Team team = teams.get(i);
             System.out.println((i + 1) + ". " + team.getName() + " - Points: " + team.getPoints() +
                     ", Goal Difference: " + team.getGoalDifference());
+        }
+    }
+
+
+    public void thingsCanDo() throws  InterruptedException{
+        simulateLeagueMatches();
+        Scanner scanner = new Scanner(System.in) ;
+        int theUserWant = 0 , secoundChoose = 0 ;
+        System.out.println("if you want to find Matches By Team press : 1" + "\n"
+        + "if you want to find Top Scoring Teams press : 2" + "\n"
+        + "if you want to find Players With AtLeast N Goals press : 3" + "\n"
+        + "if you want to get Team By Position press : 4" + " \n"
+        + "if you want to get Top Scorers press : 5" );
+        theUserWant = scanner.nextInt() ;
+
+        if (theUserWant == 1) {
+            System.out.println(" id = 1,RealMadrid\n" +
+                    "id = 2,Barselona\n" +
+                    "id = 3,AlhlalSUD\n" +
+                    "id = 4,Alnsr\n" +
+                    "id = 5,Manchester\n" +
+                    "id = 6,Milan\n" +
+                    "id = 7,InterMilan\n" +
+                    "id = 8,Ajax\n" +
+                    "id = 9,Atletico\n" +
+                    "id = 10,Dortmond" + "\n" + "choose th team id ");
+            secoundChoose = scanner.nextInt() ;
+            List<Match> matchList = findMatchesByTeam(secoundChoose) ;
+            for (Match match : matchList) {
+                System.out.println(match.toString());
+            }
+        } //1
+
+        if (theUserWant == 2) {
+            System.out.println("how mant teams you want to see");
+            secoundChoose = scanner.nextInt() ;
+            List<Team> teamList = findTopScoringTeams(secoundChoose) ;
+            for (Team team1 : teamList){
+                System.out.println(team1);
+            }
+        }
+
+        if (theUserWant == 3) {
+            System.out.println("Enter number the goals you want ");
+            secoundChoose = scanner.nextInt() ;
+            List<Player> playerList =  findPlayersWithAtLeastNGoals(secoundChoose) ;
+            for (Player player : playerList) {
+                System.out.println(player);
+            }
+        }
+
+        if (theUserWant == 4) {
+            System.out.println("Enter the position ");
+            secoundChoose = scanner.nextInt() ;
+            Team team1 =  getTeamByPosition(secoundChoose) ;
+            System.out.println(team1);
+        }
+        try {
+            if (theUserWant == 5) {
+                System.out.println("Enter number the players who scored the most number of goals,");
+                secoundChoose = scanner.nextInt();
+                HashMap<Integer, Integer> hashMapshMap = null;
+                getTopScorer(secoundChoose , hashMapshMap ) ;
+            }
+        }catch (Exception e){
+            e.printStackTrace();
         }
     }
 

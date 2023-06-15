@@ -47,6 +47,18 @@ public class Match {
         return id;
     }
 
+    @Override
+    public String toString() {
+        return "Match{" +
+                "id=" + id +
+                ", homeTeam=" + homeTeam +
+                ", awayTeam=" + awayTeam +
+                ", goals=" + goals +
+                ", homeGoals=" + homeGoals +
+                ", awayGoals=" + awayGoals +
+                '}';
+    }
+
     public Team getHomeTeam() {
         return homeTeam;
     }
